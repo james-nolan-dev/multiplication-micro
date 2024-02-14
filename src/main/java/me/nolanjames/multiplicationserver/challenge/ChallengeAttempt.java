@@ -1,17 +1,22 @@
 package me.nolanjames.multiplicationserver.challenge;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import jakarta.persistence.*;
+import lombok.*;
+import me.nolanjames.multiplicationserver.user.User;
 
+@Entity
 @Getter
-@ToString
-@EqualsAndHashCode
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class ChallengeAttempt {
+    @Id
+    @GeneratedValue
     private Long id;
-    private Long userId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_ID")
+    private User user;
     private int factorA;
     private int factorB;
     private int resultAttempt;
